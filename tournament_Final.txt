@@ -1,0 +1,2839 @@
+--------------------------------------------------------------------------------
+Section 0 - Line up
+--------------------------------------------------------------------------------
+Player 0 (P0): Lifers, Come at me
+        collude until betrayal w a twist
+Player 1 (P1): Not Yet!, Reduce chance of colluding to near zero.
+        No incentive to be nice, sorry.
+Player 2 (P2): Team Masters, Not be last
+        Revenge of the Betrayal
+Player 3 (P3): SODAN, Collude every now and again
+        Colludes every 6th round, because why do anything else but betray
+Player 4 (P4): Hi Back, My opponent record
+        On our first match, we calude, after that we check our opponents record 
+        and if their b/c >= 1 we betray
+Player 5 (P5): 6pythons, Winning_Strategy
+        betray as often as possible
+Player 6 (P6): Team 7, Betray every third round
+        Betray every third round.
+Player 7 (P7): Team South, Reverse Psychology
+        We Reverse the other Prisoners move
+Player 8 (P8): Team 9, Betray until we win
+        Betray when scores are equal or we are winning then collude.
+Player 9 (P9): 10, Collude first 140 rounds unless betrayed. Betray 141st round forward.
+        Betray if ever betrayed.
+        If I haven't been betrayed yet, I'll betray starting with the 100th roun
+        d.
+Player 10 (P10): teamAbeRoy, letsPracticeStrategy
+        Be nice...Mostly.
+Player 11 (P11): JCC, 4th Quarter Push
+        Tit for Tat with betrayal when behind after 100 rounds
+Player 12 (P12): Blackford, TitForTat
+        Collab until Betray
+Player 13 (P13): The name the team gives to itself, The name the team gives to this strategy
+        How does this strategy decide?
+--------------------------------------------------------------------------------
+Section 1 - Player vs. Player
+--------------------------------------------------------------------------------
+Each column shows pts/round earned against each other player:
+             P0     P1     P2     P3     P4     P5     P6     P7     P8     P9    P10    P11    P12    P13
+vs. P0 :      0   -248   -245   -231   -249   -243   -203   -196   -249   -242   -241   -248   -247   -122
+vs. P1 :   -252      0   -252   -293   -250   -301   -417   -258   -250   -253   -252   -250   -253   -500
+vs. P2 :   -245   -248      0   -288   -250   -296   -414      0   -250      0      0   -250   -249      0
+vs. P3 :   -234   -191   -193      0   -193   -237   -359   -278   -234   -194   -194   -234   -235   -414
+vs. P4 :   -249   -250   -250   -290      0   -299     22     -5   -250   -250   -250   -250   -253     -5
+vs. P5 :   -220   -179   -182   -216   -181      0   -326   -283   -230   -182   -182   -230   -228   -400
+vs. P6 :   -107    -17    -20    -59   -166    -49      0    -55   -134    -20    -22   -135   -135   -169
+vs. P7 :   -192   -240      0   -169      0   -155   -242      0      0    -26      0      0   -158      0
+vs. P8 :   -249   -250   -250   -234   -250   -230   -134     -3      0   -250   -250   -250   -136     -3
+vs. P9 :   -242   -248      0   -286   -250   -295   -414    -33   -250      0    -16   -250   -249      0
+vs. P10 :   -241   -248      0   -286   -250   -295   -412      0   -250    -12      0   -250   -250      0
+vs. P11 :   -248   -250   -250   -234   -250   -230   -135     -5   -250   -250   -250      0   -137     -3
+vs. P12 :   -253   -247   -249   -232   -246   -231   -135   -162   -133   -252   -244   -133      0     -5
+vs. P13 :     24    100      0     82      0     80     33      0      0      0      0      0      0      0
+TOTAL  :  -2708  -2516  -1891  -2736  -2535  -2781  -3136  -1278  -2480  -1931  -1901  -2480  -2530  -1621
+--------------------------------------------------------------------------------
+Section 2 - Leaderboard
+--------------------------------------------------------------------------------
+Average points per round:
+Team name (P#):  Score      with strategy name
+Team South(P7):        -92 points with Reverse Psychology                      
+The name t(P13):       -116 points with The name the team gives to this strategy
+Team Maste(P2):       -136 points with Not be last                             
+teamAbeRoy(P10):       -136 points with letsPracticeStrategy                    
+10        (P9):       -138 points with Collude first 140 rounds unless betrayed
+Team 9    (P8):       -178 points with Betray until we win                     
+JCC       (P11):       -178 points with 4th Quarter Push                        
+Not Yet!  (P1):       -180 points with Reduce chance of colluding to near zero.
+Blackford (P12):       -181 points with TitForTat                               
+Hi Back   (P4):       -182 points with My opponent record                      
+Lifers    (P0):       -194 points with Come at me                              
+SODAN     (P3):       -196 points with Collude every now and again             
+6pythons  (P5):       -199 points with Winning_Strategy                        
+Team 7    (P6):       -224 points with Betray every third round                
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+team1--------------------------------------------------------------------------------
+####
+# Each team's file must define four tokens:
+#     team_name: a string
+#     strategy_name: a string
+#     strategy_description: a string
+#     move: A function that returns 'c' or 'b'
+####
+
+team_name = 'Lifers' # Only 10 chars displayed.
+strategy_name = 'Come at me'
+strategy_description = 'collude until betrayal w a twist'
+    
+def move(my_history, their_history, my_score, their_score):
+    ''' Arguments accepted: my_history, their_history are strings.
+    my_score, their_score are ints.
+    
+    Make my move.
+    Returns 'c' or 'b'. 
+    '''
+
+    # my_history: a string with one letter (c or b) per round that has been played with this opponent.
+    # their_history: a string of the same length as history, possibly empty. 
+    # The first round between these two players is my_history[0] and their_history[0].
+    # The most recent round is my_history[-1] and their_history[-1].
+    
+    # Analyze my_history and their_history and/or my_score and their_score.
+    # Decide whether to return 'c' or 'b'.
+    
+    if len(my_history) == 0:
+        return 'c'
+    else:
+        if their_history[-1] == 'b':
+            return 'b'
+        elif len(my_history) % 4==0:
+            return 'b'    
+        else: 
+            return 'c'
+            
+--------------------------------------------------------------------------------
+team2--------------------------------------------------------------------------------
+####
+# Each team's file must define four tokens:
+#     team_name: a string
+#     strategy_name: a string
+#     strategy_description: a string
+#     move: A function that returns 'c' or 'b'
+####
+
+team_name = 'Not Yet!' # Only 10 chars displayed.
+strategy_name = 'Reduce chance of colluding to near zero.'
+strategy_description = 'No incentive to be nice, sorry.'
+    
+def move(my_history, their_history, my_score, their_score):
+    ''' Arguments accepted: my_history, their_history are strings.
+    my_score, their_score are ints.
+    
+    Make my move.
+    Returns 'c' or 'b'. 
+    '''
+
+    # my_history: a string with one letter (c or b) per round that has been played with this opponent.
+    # their_history: a string of the same length as history, possibly empty. 
+    # The first round between these two players is my_history[0] and their_history[0].
+    # The most recent round is my_history[-1] and their_history[-1].
+    
+    # Analyze my_history and their_history and/or my_score and their_score.
+    # Decide whether to return 'c' or 'b'.
+    
+    import random
+    die1 = random.uniform(0, 1)
+    die2 = random.randint(0, 10000000000)
+    
+    if die1 == die2:
+        return 'c'
+    else:
+        return 'b'
+
+    
+def test_move(my_history, their_history, my_score, their_score, result):
+    '''calls move(my_history, their_history, my_score, their_score)
+    from this module. Prints error if return value != result.
+    Returns True or False, dpending on whether result was as expected.
+    '''
+    real_result = move(my_history, their_history, my_score, their_score)
+    if real_result == result:
+        return True
+    else:
+        print("move(" +
+            ", ".join(["'"+my_history+"'", "'"+their_history+"'",
+                       str(my_score), str(their_score)])+
+            ") returned " + "'" + real_result + "'" +
+            " and should have returned '" + result + "'")
+        return False
+
+if __name__ == '__main__':
+     
+    # Test 1: Betray on first move.
+    if test_move(my_history='',
+              their_history='', 
+              my_score=0,
+              their_score=0,
+              result='b'):
+         print 'Test passed'
+     # Test 2: Continue betraying if they collude despite being betrayed.
+    test_move(my_history='bbb',
+              their_history='ccc', 
+              # Note the scores are for testing move().
+              # The history and scores don't need to match unless
+              # that is relevant to the test of move(). Here,
+              # the simulation (if working correctly) would have awarded 
+              # 300 to me and -750 to them. This test will pass if and only if
+              # move('bbb', 'ccc', 0, 0) returns 'b'.
+              my_score=0, 
+              their_score=0,
+              result='b')             --------------------------------------------------------------------------------
+team3--------------------------------------------------------------------------------
+####
+# Each team's file must define four tokens:
+#     team_name: a string
+#     strategy_name: a string
+#     strategy_description: a string
+#     move: A function that returns 'c' or 'b'
+####
+
+team_name = 'Team Masters' # Only 10 chars displayed.
+strategy_name = 'Not be last'
+strategy_description = 'Revenge of the Betrayal'
+    
+def move(my_history, their_history, my_score, their_score):
+    ''' Arguments accepted: my_history, their_history are strings.
+    my_score, their_score are ints.
+    
+    Make my move.
+    Returns 'c' or 'b'. 
+    '''
+
+    # my_history: a string with one letter (c or b) per round that has been played with this opponent.
+    # their_history: a string of the same length as history, possibly empty. 
+    # The first round between these two players is my_history[0] and their_history[0].
+    # The most recent round is my_history[-1] and their_history[-1].
+    
+    # Analyze my_history and their_history and/or my_score and their_score.
+    # Decide whether to return 'c' or 'b'.
+    
+    if ('b' in their_history):
+        return 'b'
+    
+    return 'c'
+
+    
+def test_move(my_history, their_history, my_score, their_score, result):
+    '''calls move(my_history, their_history, my_score, their_score)
+    from this module. Prints error if return value != result.
+    Returns True or False, dpending on whether result was as expected.
+    '''
+    real_result = move(my_history, their_history, my_score, their_score)
+    if real_result == result:
+        return True
+    else:
+        print("move(" +
+            ", ".join(["'"+my_history+"'", "'"+their_history+"'",
+                       str(my_score), str(their_score)])+
+            ") returned " + "'" + real_result + "'" +
+            " and should have returned '" + result + "'")
+        return False
+
+if __name__ == '__main__':
+     
+    # Test 1: Betray on first move.
+    if test_move(my_history='',
+              their_history='', 
+              my_score=0,
+              their_score=0,
+              result='b'):
+         print 'Test passed'
+     # Test 2: Continue betraying if they collude despite being betrayed.
+    test_move(my_history='bbb',
+              their_history='ccc', 
+              # Note the scores are for testing move().
+              # The history and scores don't need to match unless
+              # that is relevant to the test of move(). Here,
+              # the simulation (if working correctly) would have awarded 
+              # 300 to me and -750 to them. This test will pass if and only if
+              # move('bbb', 'ccc', 0, 0) returns 'b'.
+              my_score=0, 
+              their_score=0,
+              result='b')             --------------------------------------------------------------------------------
+team4--------------------------------------------------------------------------------
+####
+# Each team's file must define four tokens:
+#     team_name: a string
+#     strategy_name: a string
+#     strategy_description: a string
+#     move: A function that returns 'c' or 'b'
+####
+
+team_name = 'SODAN' # Only 10 chars displayed.
+strategy_name = 'Collude every now and again'
+strategy_description = 'Colludes every 6th round, because why do anything else but betray'
+    
+def move(my_history, their_history, my_score, their_score):
+    ''' Arguments accepted: my_history, their_history are strings.
+    my_score, their_score are ints.
+    
+    Make my move.
+    Returns 'c' or 'b'. 
+    '''
+
+    # my_history: a string with one letter (c or b) per round that has been played with this opponent.
+    # their_history: a string of the same length as history, possibly empty. 
+    # The first round between these two players is my_history[0] and their_history[0].
+    # The most recent round is my_history[-1] and their_history[-1].
+    
+    # Analyze my_history and their_history and/or my_score and their_score.
+    # Decide whether to return 'c' or 'b'.
+    if len(my_history) % 6 == 0:
+        return 'c'
+    else:
+        return 'b'
+
+    
+def test_move(my_history, their_history, my_score, their_score, result):
+    '''calls move(my_history, their_history, my_score, their_score)
+    from this module. Prints error if return value != result.
+    Returns True or False, dpending on whether result was as expected.
+    '''
+    real_result = move(my_history, their_history, my_score, their_score)
+    if real_result == result:
+        return True
+    else:
+        print("move(" +
+            ", ".join(["'"+my_history+"'", "'"+their_history+"'",
+                       str(my_score), str(their_score)])+
+            ") returned " + "'" + real_result + "'" +
+            " and should have returned '" + result + "'")
+        return False
+
+if __name__ == '__main__':
+     
+    # Test 1: Betray on first move.
+    if test_move(my_history='',
+              their_history='', 
+              my_score=0,
+              their_score=0,
+              result='b'):
+         print 'Test passed'
+     # Test 2: Continue betraying if they collude despite being betrayed.
+    test_move(my_history='bbb',
+              their_history='ccc', 
+              # Note the scores are for testing move().
+              # The history and scores don't need to match unless
+              # that is relevant to the test of move(). Here,
+              # the simulation (if working correctly) would have awarded 
+              # 300 to me and -750 to them. This test will pass if and only if
+              # move('bbb', 'ccc', 0, 0) returns 'b'.
+              my_score=0, 
+              their_score=0,
+              result='b')             --------------------------------------------------------------------------------
+team5--------------------------------------------------------------------------------
+####
+# Each team's file must define four tokens:
+#     team_name: a string
+#     strategy_name: a string
+#     strategy_description: a string
+#     move: A function that returns 'c' or 'b'
+####
+
+team_name = 'Hi Back' # Only 10 chars displayed.
+strategy_name = 'My opponent record'
+strategy_description = 'On our first match, we calude, after that we check our opponents record and if their b/c >= 1 we betray'
+    
+def move(my_history, their_history, my_score, their_score):
+    ''' Arguments accepted: my_history, their_history are strings.
+    my_score, their_score are ints.
+    
+    Make my move.
+    Returns 'c' or 'b'. 
+    '''
+
+    # my_history: a string with one letter (c or b) per round that has been played with this opponent.
+    # their_history: a string of the same length as history, possibly empty. 
+    # The first round between these two players is my_history[0] and their_history[0].
+    # The most recent round is my_history[-1] and their_history[-1].
+    
+    # Analyze my_history and their_history and/or my_score and their_score.
+    # Decide whether to return 'c' or 'b'.
+    
+    c = 1
+    b = 1
+    for i in range (len(their_history)):
+        if their_history[i] == 'b':
+            b += 1 
+        if their_history[i] == 'c':
+            c += 1
+    
+    if len(my_history) == 0:
+        return 'b'
+    else:
+        if b/c >= 1:
+            return 'b'
+        return 'c'
+    
+
+
+    
+def test_move(my_history, their_history, my_score, their_score, result):
+    '''calls move(my_history, their_history, my_score, their_score)
+    from this module. Prints error if return value != result.
+    Returns True or False, dpending on whether result was as expected.
+    '''
+    real_result = move(my_history, their_history, my_score, their_score)
+    if real_result == result:
+        return True
+    else:
+        print("move(" +
+            ", ".join(["'"+my_history+"'", "'"+their_history+"'",
+                       str(my_score), str(their_score)])+
+            ") returned " + "'" + real_result + "'" +
+            " and should have returned '" + result + "'")
+        return False
+
+if __name__ == '__main__':
+     
+    # Test 1: Betray on first move.
+    if test_move(my_history='',
+              their_history='', 
+              my_score=0,
+              their_score=0,
+              result='b'):
+         print 'Test passed'
+     # Test 2: Continue betraying if they collude despite being betrayed.
+    test_move(my_history='bbb',
+              their_history='ccc', 
+              # Note the scores are for testing move().
+              # The history and scores don't need to match unless
+              # that is relevant to the test of move(). Here,
+              # the simulation (if working correctly) would have awarded 
+              # 300 to me and -750 to them. This test will pass if and only if
+              # move('bbb', 'ccc', 0, 0) returns 'b'.
+              my_score=0, 
+              their_score=0,
+              result='b')             --------------------------------------------------------------------------------
+team6--------------------------------------------------------------------------------
+####
+# Each team's file must define four tokens:
+#     team_name: a string
+#     strategy_name: a string
+#     strategy_description: a string
+#     move: A function that returns 'c' or 'b'
+####
+
+team_name = '6pythons' # Only 10 chars displayed.
+strategy_name = 'Winning_Strategy'
+strategy_description = 'betray as often as possible'
+    
+def move(my_history, their_history, my_score, their_score):
+    ''' Arguments accepted: my_history, their_history are strings.
+    my_score, their_score are ints.
+    
+    Make my move.
+    Returns 'c' or 'b'. 
+    '''
+
+    # my_history: a string with one letter (c or b) per round that has been played with this opponent.
+    # their_history: a string of the same length as history, possibly empty. 
+    # The first round between these two players is my_history[0] and their_history[0].
+    # The most recent round is my_history[-1] and their_history[-1].
+    
+    # Analyze my_history and their_history and/or my_score and their_score.
+    # Decide whether to return 'c' or 'b'.
+    i = len(my_history)
+    if i%5 == 0:
+        return 'c'
+    elif i%3 == 0:
+        return 'b'
+    else:
+        return 'b'
+
+    
+def test_move(my_history, their_history, my_score, their_score, result):
+    '''calls move(my_history, their_history, my_score, their_score)
+    from this module. Prints error if return value != result.
+    Returns True or False, dpending on whether result was as expected.
+    '''
+    real_result = move(my_history, their_history, my_score, their_score)
+    if real_result == result:
+        return True
+    else:
+        print("move(" +
+            ", ".join(["'"+my_history+"'", "'"+their_history+"'",
+                       str(my_score), str(their_score)])+
+            ") returned " + "'" + real_result + "'" +
+            " and should have returned '" + result + "'")
+        return False
+
+if __name__ == '__main__':
+     
+    # Test 1: Betray on first move.
+    if test_move(my_history='',
+              their_history='', 
+              my_score=0,
+              their_score=0,
+              result='b'):
+         print 'Test passed'
+     # Test 2: Continue betraying if they collude despite being betrayed.
+    test_move(my_history='bbb',
+              their_history='ccc', 
+              # Note the scores are for testing move().
+              # The history and scores don't need to match unless
+              # that is relevant to the test of move(). Here,
+              # the simulation (if working correctly) would have awarded 
+              # 300 to me and -750 to them. This test will pass if and only if
+              # move('bbb', 'ccc', 0, 0) returns 'b'.
+              my_score=0, 
+              their_score=0,
+              result='b')                      --------------------------------------------------------------------------------
+team7--------------------------------------------------------------------------------
+####
+# Each team's file must define four tokens:
+#     team_name: a string
+#     strategy_name: a string
+#     strategy_description: a string
+#     move: A function that returns 'c' or 'b'
+####
+
+team_name = 'Team 7'
+strategy_name = 'Betray every third round'
+strategy_description = 'Betray every third round.'
+    
+def move(my_history, their_history, my_score, their_score):
+    '''Make my move based on the history with this player.
+    
+    history: a string with one letter (c or b) per round that has been played with this opponent.
+    their_history: a string of the same length as history, possibly empty. 
+    The first round between these two players is my_history[0] and their_history[0]
+    The most recent round is my_history[-1] and their_history[-1]
+    
+    Returns 'c' or 'b' for collude or betray.
+    '''
+    # This player colludes on even numbered rounds (first round is round #0).
+    if len(my_history)%3 == 0:
+        return 'b'
+    else:
+        return 'c'--------------------------------------------------------------------------------
+team8--------------------------------------------------------------------------------
+####
+# Each team's file must define four tokens:
+#     team_name: a string
+#     strategy_name: a string
+#     strategy_description: a string
+#     move: A function that returns 'c' or 'b'
+####
+
+team_name = 'Team South' # Only 10 chars displayed.
+strategy_name = 'Reverse Psychology'
+strategy_description = 'We Reverse the other Prisoners move'
+    
+def move(my_history, their_history, my_score, their_score):
+    ''' Arguments accepted: my_history, their_history are strings.
+    my_score, their_score are ints.
+    
+    Make my move.
+    Returns 'c' or 'b'. 
+    '''
+
+    # my_history: a string with one letter (c or b) per round that has been played with this opponent.
+    # their_history: a string of the same length as history, possibly empty. 
+    # The first round between these two players is my_history[0] and their_history[0].
+    # The most recent round is my_history[-1] and their_history[-1].
+    
+    # Analyze my_history and their_history and/or my_score and their_score.
+    # Decide whether to return 'c' or 'b'.
+    
+    
+    if len(their_history)<5:
+        return 'c'
+    elif their_history[-1] == their_history[-2]:
+        return their_history[-3]
+    
+    return their_history[-1]
+    #return 'c'
+
+    
+--------------------------------------------------------------------------------
+team9--------------------------------------------------------------------------------
+####
+# Each team's file must define four tokens:
+#     team_name: a string
+#     strategy_name: a string
+#     strategy_description: a string
+#     move: A function that returns 'c' or 'b'
+####
+
+team_name = 'Team 9' # Only 10 chars displayed.
+strategy_name = 'Betray until we win'
+strategy_description = 'Betray when scores are equal or we are winning then collude.'
+    
+def move(my_history, their_history, my_score, their_score):
+    ''' Arguments accepted: my_history, their_history are strings.
+    my_score, their_score are ints.
+    
+    Make my move.
+    Returns 'c' or 'b'. 
+    '''
+
+    # my_history: a string with one letter (c or b) per round that has been played with this opponent.
+    # their_history: a string of the same length as history, possibly empty. 
+    # The first round between these two players is my_history[0] and their_history[0].
+    # The most recent round is my_history[-1] and their_history[-1].
+    
+    # Analyze my_history and their_history and/or my_score and their_score.
+    # Decide whether to return 'c' or 'b'.
+    
+    if my_score == their_score or my_score < their_score:
+        return 'b'
+    else:
+        return 'c'
+        
+
+    
+def test_move(my_history, their_history, my_score, their_score, result):
+    '''calls move(my_history, their_history, my_score, their_score)
+    from this module. Prints error if return value != result.
+    Returns True or False, dpending on whether result was as expected.
+    '''
+    real_result = move(my_history, their_history, my_score, their_score)
+    if real_result == result:
+        return True
+    else:
+        print("move(" +
+            ", ".join(["'"+my_history+"'", "'"+their_history+"'",
+                       str(my_score), str(their_score)])+
+            ") returned " + "'" + real_result + "'" +
+            " and should have returned '" + result + "'")
+        return False
+
+if __name__ == '__main__':
+     
+    # Test 1: Betray on first move.
+    if test_move(my_history='',
+              their_history='', 
+              my_score=0,
+              their_score=0,
+              result='b'):
+         print 'Test passed'
+     # Test 2: Continue betraying if they collude despite being betrayed.
+    test_move(my_history='bbb',
+              their_history='ccc', 
+              # Note the scores are for testing move().
+              # The history and scores don't need to match unless
+              # that is relevant to the test of move(). Here,
+              # the simulation (if working correctly) would have awarded 
+              # 300 to me and -750 to them. This test will pass if and only if
+              # move('bbb', 'ccc', 0, 0) returns 'b'.
+              my_score=0, 
+              their_score=0,
+              result='b')             --------------------------------------------------------------------------------
+team10--------------------------------------------------------------------------------
+####
+# Each team's file must define four tokens:
+#     team_name: a string
+#     strategy_name: a string
+#     strategy_description: a string
+#     move: A function that returns 'c' or 'b'
+####
+
+team_name = '10'
+strategy_name = 'Collude first 140 rounds unless betrayed. Betray 141st round forward.'
+strategy_description = '''\
+Betray if ever betrayed.
+If I haven't been betrayed yet, I'll betray starting with the 100th round.
+'''
+
+import random
+    
+def move(my_history, their_history, my_score, their_score):
+    '''Make my move based on the history with this player.
+    
+    history: a string with one letter (c or b) per round that has been played with this opponent.
+    their_history: a string of the same length as history, possibly empty. 
+    The first round between these two players is my_history[0] and their_history[0]
+    The most recent round is my_history[-1] and their_history[-1]
+    
+    Returns 'c' or 'b' for collude or betray.Edit
+    '''
+    # If the other player has betrayed or this is the last half of the game, 
+    if 'b' in their_history or len(their_history)>150: 
+        return 'b'               # Betray.
+    else:
+        return 'c'         # but 90% of the time collude
+    
+    
+    --------------------------------------------------------------------------------
+team11--------------------------------------------------------------------------------
+####
+# Each team's file must define four tokens:
+#     team_name: a string
+#     strategy_name: a string
+#     strategy_description: a string
+#     move: A function that returns 'c' or 'b'
+####
+
+team_name = 'teamAbeRoy' # Only 10 chars displayed.
+strategy_name = 'letsPracticeStrategy'
+strategy_description = 'Be nice...Mostly.'
+    
+def move(my_history, their_history, my_score, their_score):
+    ''' Arguments accepted: my_history, their_history are strings.
+    my_score, their_score are ints.
+    
+    Make my move.
+    Returns 'c' or 'b'. 
+    '''
+
+    # my_history: a string with one letter (c or b) per round that has been played with this opponent.
+    # their_history: a string of the same length as history, possibly empty. 
+    # The first round between these two players is my_history[0] and their_history[0].
+    # The most recent round is my_history[-1] and their_history[-1].
+    
+    # Analyze my_history and their_history and/or my_score and their_score.
+    # Decide whether to return 'c' or 'b'.
+    
+    ourMove = "c"
+    if "b" in their_history: 
+        ourMove = "b"
+    return ourMove
+
+    
+def test_move(my_history, their_history, my_score, their_score, result):
+    '''calls move(my_history, their_history, my_score, their_score)
+    from this module. Prints error if return value != result.
+    Returns True or False, dpending on whether result was as expected.
+    '''
+    real_result = move(my_history, their_history, my_score, their_score)
+    if real_result == result:
+        return True
+    else:
+        print("move(" +
+            ", ".join(["'"+my_history+"'", "'"+their_history+"'",
+                       str(my_score), str(their_score)])+
+            ") returned " + "'" + real_result + "'" +
+            " and should have returned '" + result + "'")
+        return False
+
+if __name__ == '__main__':
+     
+    # Test 1: Betray on first move.
+    if test_move(my_history='',
+              their_history='', 
+              my_score=0,
+              their_score=0,
+              result='c'):
+         print 'Test passed'
+     # Test 2: Continue betraying if they collude despite being betrayed.
+    test_move(my_history='bbb',
+              their_history='ccc', 
+              # Note the scores are for testing move().
+              # The history and scores don't need to match unless
+              # that is relevant to the test of move(). Here,
+              # the simulation (if working correctly) would have awarded 
+              # 300 to me and -750 to them. This test will pass if and only if
+              # move('bbb', 'ccc', 0, 0) returns 'b'.
+              my_score=0, 
+              their_score=0,
+              result='b')             --------------------------------------------------------------------------------
+team12--------------------------------------------------------------------------------
+####
+# Each team's file must define four tokens:
+#     team_name: a string
+#     strategy_name: a string
+#     strategy_description: a string
+#     move: A function that returns 'c' or 'b'
+####
+
+team_name = 'JCC' # Only 10 chars displayed.
+strategy_name = '4th Quarter Push'
+strategy_description = 'Tit for Tat with betrayal when behind after 100 rounds'
+    
+def move(my_history, their_history, my_score, their_score):
+    ''' Arguments accepted: my_history, their_history are strings.
+    my_score, their_score are ints.
+    
+    Make my move.
+    Returns 'c' or 'b'. 
+    '''
+
+    # my_history: a string with one letter (c or b) per round that has been played with this opponent.
+    # their_history: a string of the same length as history, possibly empty. 
+    # The first round between these two players is my_history[0] and their_history[0].
+    # The most recent round is my_history[-1] and their_history[-1].
+    
+    # Analyze my_history and their_history and/or my_score and their_score.
+    # Decide whether to return 'c' or 'b'.
+    if len(my_history) == 0:
+        return 'b'
+    elif len(my_history) > 100 and my_score < their_score:
+        return 'b'
+    elif their_history[-1] =='c':
+        return 'c'
+    else:
+        return 'b'
+
+
+    
+def test_move(my_history, their_history, my_score, their_score, result):
+    '''calls move(my_history, their_history, my_score, their_score)
+    from this module. Prints error if return value != result.
+    Returns True or False, dpending on whether result was as expected.
+    '''
+    real_result = move(my_history, their_history, my_score, their_score)
+    if real_result == result:
+        return True
+    else:
+        print("move(" +
+            ", ".join(["'"+my_history+"'", "'"+their_history+"'",
+                       str(my_score), str(their_score)])+
+            ") returned " + "'" + real_result + "'" +
+            " and should have returned '" + result + "'")
+        return False
+
+if __name__ == '__main__':
+     
+    # Test 1: Betray on first move.
+    if test_move(my_history='',
+              their_history='', 
+              my_score=0,
+              their_score=0,
+              result='b'):
+         print 'Test passed'
+     # Test 2: Continue betraying if they collude despite being betrayed.
+    test_move(my_history='bbb',
+              their_history='ccc', 
+              # Note the scores are for testing move().
+              # The history and scores don't need to match unless
+              # that is relevant to the test of move(). Here,
+              # the simulation (if working correctly) would have awarded 
+              # 300 to me and -750 to them. This test will pass if and only if
+              # move('bbb', 'ccc', 0, 0) returns 'b'.
+              my_score=0, 
+              their_score=0,
+              result='b')             --------------------------------------------------------------------------------
+team13--------------------------------------------------------------------------------
+import random
+####
+# Each team's file must define four tokens:
+#     team_name: a string
+#     strategy_name: a string
+#     strategy_description: a string
+#     move: A function that returns 'c' or 'b'
+####
+
+team_name = 'Blackford' # Only 10 chars displayed.
+strategy_name = 'TitForTat'
+strategy_description = 'Collab until Betray'
+
+
+
+def move(my_history, their_history, my_score, their_score):
+    ''' Arguments accepted: my_history, their_history are strings.
+    my_score, their_score are ints.
+    
+    Make my move.
+    Returns 'c' or 'b'. 
+    '''
+
+    # my_history: a string with one letter (c or b) per round that has been played with this opponent.
+    # their_history: a string of the same length as history, possibly empty. 
+    # The first round between these two players is my_history[0] and their_history[0].
+    # The most recent round is my_history[-1] and their_history[-1].
+    
+    # Analyze my_history and their_history and/or my_score and their_score.
+    # Decide whether to return 'c' or 'b'.
+    if(len(their_history) > 2):
+        if(their_history [-2] == 'c' and their_history [-1] == 'c'):
+            return 'c'
+        elif(their_history [-2] == 'b' and their_history[-1] == 'b'):
+            return 'b'
+        elif(their_history [-2] == 'c' and their_history[-1] == 'b'):
+            return 'c'
+        elif(their_history[-2] == 'b' and their_history[-1] == 'c'):
+            return 'b'
+        else: 
+            return random.choice(['b', 'c'])
+    else:
+        return random.choice(['b', 'c'])    
+
+def test_move(my_history, their_history, my_score, their_score, result):
+    '''calls move(my_history, their_history, my_score, their_score)
+    from this module. Prints error if return value != result.
+    Returns True or False, dpending on whether result was as expected.
+    '''
+    real_result = move(my_history, their_history, my_score, their_score)
+    if real_result == result:
+        return True
+    else:
+        print("move(" +
+            ", ".join(["'"+my_history+"'", "'"+their_history+"'",
+                       str(my_score), str(their_score)])+
+            ") returned " + "'" + real_result + "'" +
+            " and should have returned '" + result + "'")
+        return False
+
+if __name__ == '__main__':
+     
+    # Test 1: Betray on first move.
+    if test_move(my_history='',
+              their_history='', 
+              my_score=0,
+              their_score=0,
+              result='b'):
+         print 'Test passed'
+     # Test 2: Continue betraying if they collude despite being betrayed.
+    test_move(my_history='bbb',
+              their_history='ccc', 
+              # Note the scores are for testing move().
+              # The history and scores don't need to match unless
+              # that is relevant to the test of move(). Here,
+              # the simulation (if working correctly) would have awarded 
+              # 300 to me and -750 to them. This test will pass if and only if
+              # move('bbb', 'ccc', 0, 0) returns 'b'.
+              my_score=0, 
+              their_score=0,
+              result='b')             --------------------------------------------------------------------------------
+team14--------------------------------------------------------------------------------
+####
+# Each team's file must define four tokens:
+#     team_name: a string
+#     strategy_name: a string
+#     strategy_description: a string
+#     move: A function that returns 'c' or 'b'
+####
+
+team_name = 'The name the team gives to itself' # Only 10 chars displayed.
+strategy_name = 'The name the team gives to this strategy'
+strategy_description = 'How does this strategy decide?'
+    
+def move(my_history, their_history, my_score, their_score):
+    ''' Arguments accepted: my_history, their_history are strings.
+    my_score, their_score are ints.
+    
+    Make my move.
+    Returns 'c' or 'b'. 
+    '''
+
+    # my_history: a string with one letter (c or b) per round that has been played with this opponent.
+    # their_history: a string of the same length as history, possibly empty. 
+    # The first round between these two players is my_history[0] and their_history[0].
+    # The most recent round is my_history[-1] and their_history[-1].
+    
+    # Analyze my_history and their_history and/or my_score and their_score.
+    # Decide whether to return 'c' or 'b'.
+    
+    return 'c'
+
+    
+def test_move(my_history, their_history, my_score, their_score, result):
+    '''calls move(my_history, their_history, my_score, their_score)
+    from this module. Prints error if return value != result.
+    Returns True or False, dpending on whether result was as expected.
+    '''
+    real_result = move(my_history, their_history, my_score, their_score)
+    if real_result == result:
+        return True
+    else:
+        print("move(" +
+            ", ".join(["'"+my_history+"'", "'"+their_history+"'",
+                       str(my_score), str(their_score)])+
+            ") returned " + "'" + real_result + "'" +
+            " and should have returned '" + result + "'")
+        return False
+
+if __name__ == '__main__':
+     
+    # Test 1: Betray on first move.
+    if test_move(my_history='',
+              their_history='', 
+              my_score=0,
+              their_score=0,
+              result='b'):
+         print 'Test passed'
+     # Test 2: Continue betraying if they collude despite being betrayed.
+    test_move(my_history='bbb',
+              their_history='ccc', 
+              # Note the scores are for testing move().
+              # The history and scores don't need to match unless
+              # that is relevant to the test of move(). Here,
+              # the simulation (if working correctly) would have awarded 
+              # 300 to me and -750 to them. This test will pass if and only if
+              # move('bbb', 'ccc', 0, 0) returns 'b'.
+              my_score=0, 
+              their_score=0,
+              result='b')             --------------------------------------------------------------------------------
+Section 3 - Game Data for Team Lifers
+--------------------------------------------------------------------------------
+-252 pt/round: Lifers(P0) "Come at me"
+-248 pt/round: Not Yet!(P1) "Reduce chance of colluding to near zero."
+cbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+Bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-245 pt/round: Lifers(P0) "Come at me"
+-245 pt/round: Team Masters(P2) "Not be last"
+CCCCBcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+CCCCcBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-234 pt/round: Lifers(P0) "Come at me"
+-231 pt/round: SODAN(P3) "Collude every now and again"
+CcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBc
+CBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcB
+
+bbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbb
+bbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbb
+
+bbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcb
+bbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBb
+
+--------------------------------------------------------------------------------
+-249 pt/round: Lifers(P0) "Come at me"
+-249 pt/round: Hi Back(P4) "My opponent record"
+cBcBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+BcBcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-220 pt/round: Lifers(P0) "Come at me"
+-243 pt/round: 6pythons(P5) "Winning_Strategy"
+CcbbbBcbbbBcbbbBbbbbBcbbbBcbbbBcbbbBbbbbBcbbbBcbbbBcbbbBbbbbBcbbbBcbbbBcbbbBbbbb
+CBbbbcBbbbcBbbbcbbbbcBbbbcBbbbcBbbbcbbbbcBbbbcBbbbcBbbbcbbbbcBbbbcBbbbcBbbbcbbbb
+
+BcbbbBcbbbBcbbbBbbbbBcbbbBcbbbBcbbbBbbbbBcbbbBcbbbBcbbbBbbbbBcbbbBcbbbBcbb
+cBbbbcBbbbcBbbbcbbbbcBbbbcBbbbcBbbbcbbbbcBbbbcBbbbcBbbbcbbbbcBbbbcBbbbcBbb
+
+--------------------------------------------------------------------------------
+-107 pt/round: Lifers(P0) "Come at me"
+-203 pt/round: Team 7(P6) "Betray every third round"
+cBCcBCcBBcBCbBCcBCcBBcBCbBCcBCcBBcBCbBCcBCcBBcBCbBCcBCcBBcBCbBCcBCcBBcBCbBCcBCcB
+BcCBcCBccBcCbcCBcCBccBcCbcCBcCBccBcCbcCBcCBccBcCbcCBcCBccBcCbcCBcCBccBcCbcCBcCBc
+
+BcBCbBCcBCcBBcBCbBCcBCcBBcBCbBCcBCcBBcBCbBCcBCcBBcBCbBCcBCcBBcBCbBCcBCcBBcBCb
+cBcCbcCBcCBccBcCbcCBcCBccBcCbcCBcCBccBcCbcCBcCBccBcCbcCBcCBccBcCbcCBcCBccBcCb
+
+--------------------------------------------------------------------------------
+-192 pt/round: Lifers(P0) "Come at me"
+-196 pt/round: Team South(P7) "Reverse Psychology"
+CCCCBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBc
+CCCCcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcB
+
+BcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcB
+cBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBc
+
+--------------------------------------------------------------------------------
+-249 pt/round: Lifers(P0) "Come at me"
+-249 pt/round: Team 9(P8) "Betray until we win"
+cBcBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+BcBcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-242 pt/round: Lifers(P0) "Come at me"
+-242 pt/round: 10(P9) "Collude first 140 rounds unless betrayed. Betray 141st round forward."
+CCCCBcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+CCCCcBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-241 pt/round: Lifers(P0) "Come at me"
+-241 pt/round: teamAbeRoy(P10) "letsPracticeStrategy"
+CCCCBcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+CCCCcBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-248 pt/round: Lifers(P0) "Come at me"
+-248 pt/round: JCC(P11) "4th Quarter Push"
+cBcBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+BcBcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-253 pt/round: Lifers(P0) "Come at me"
+-247 pt/round: Blackford(P12) "TitForTat"
+cbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+Bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+24 pt/round: Lifers(P0) "Come at me"
+-122 pt/round: The name the team gives to itself(P13) "The name the team gives to this strategy"
+CCCCBCCCBCCCBCCCBCCCBCCCBCCCBCCCBCCCBCCCBCCCBCCCBCCCBCCCBCCCBCCCBCCCBCCCBCCCBCCC
+CCCCcCCCcCCCcCCCcCCCcCCCcCCCcCCCcCCCcCCCcCCCcCCCcCCCcCCCcCCCcCCCcCCCcCCCcCCCcCCC
+
+BCCCBCCCBCCCBCCCBCCCBCCCBCCCBCCCBCCCBCCCBCCCBCCCBCCC
+cCCCcCCCcCCCcCCCcCCCcCCCcCCCcCCCcCCCcCCCcCCCcCCCcCCC
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Section 3 - Game Data for Team Not Yet!
+--------------------------------------------------------------------------------
+-248 pt/round: Not Yet!(P1) "Reduce chance of colluding to near zero."
+-252 pt/round: Lifers(P0) "Come at me"
+Bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+cbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-248 pt/round: Not Yet!(P1) "Reduce chance of colluding to near zero."
+-252 pt/round: Team Masters(P2) "Not be last"
+Bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+cbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-191 pt/round: Not Yet!(P1) "Reduce chance of colluding to near zero."
+-293 pt/round: SODAN(P3) "Collude every now and again"
+BbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBb
+cbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcb
+
+bbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbb
+bbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbb
+
+--------------------------------------------------------------------------------
+-250 pt/round: Not Yet!(P1) "Reduce chance of colluding to near zero."
+-250 pt/round: Hi Back(P4) "My opponent record"
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-179 pt/round: Not Yet!(P1) "Reduce chance of colluding to near zero."
+-301 pt/round: 6pythons(P5) "Winning_Strategy"
+BbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbb
+cbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbb
+
+BbbbbBbbbbBbbbbBbbbbBbb
+cbbbbcbbbbcbbbbcbbbbcbb
+
+--------------------------------------------------------------------------------
+-17 pt/round: Not Yet!(P1) "Reduce chance of colluding to near zero."
+-417 pt/round: Team 7(P6) "Betray every third round"
+bBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbB
+bccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbc
+
+BbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBB
+cbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbcc
+
+--------------------------------------------------------------------------------
+-240 pt/round: Not Yet!(P1) "Reduce chance of colluding to near zero."
+-258 pt/round: Team South(P7) "Reverse Psychology"
+BBBBBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+cccccbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbb
+bbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-250 pt/round: Not Yet!(P1) "Reduce chance of colluding to near zero."
+-250 pt/round: Team 9(P8) "Betray until we win"
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-248 pt/round: Not Yet!(P1) "Reduce chance of colluding to near zero."
+-253 pt/round: 10(P9) "Collude first 140 rounds unless betrayed. Betray 141st round forward."
+Bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+cbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-248 pt/round: Not Yet!(P1) "Reduce chance of colluding to near zero."
+-252 pt/round: teamAbeRoy(P10) "letsPracticeStrategy"
+Bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+cbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-250 pt/round: Not Yet!(P1) "Reduce chance of colluding to near zero."
+-250 pt/round: JCC(P11) "4th Quarter Push"
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-247 pt/round: Not Yet!(P1) "Reduce chance of colluding to near zero."
+-253 pt/round: Blackford(P12) "TitForTat"
+bBBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bccbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+100 pt/round: Not Yet!(P1) "Reduce chance of colluding to near zero."
+-500 pt/round: The name the team gives to itself(P13) "The name the team gives to this strategy"
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+cccccccccccccccccccccccccccccccccccccccccccc
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Section 3 - Game Data for Team Team Masters
+--------------------------------------------------------------------------------
+-245 pt/round: Team Masters(P2) "Not be last"
+-245 pt/round: Lifers(P0) "Come at me"
+CCCCcBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+CCCCBcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-252 pt/round: Team Masters(P2) "Not be last"
+-248 pt/round: Not Yet!(P1) "Reduce chance of colluding to near zero."
+cbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+Bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-193 pt/round: Team Masters(P2) "Not be last"
+-288 pt/round: SODAN(P3) "Collude every now and again"
+CcbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBb
+CBbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcb
+
+bbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBb
+bbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcb
+
+--------------------------------------------------------------------------------
+-250 pt/round: Team Masters(P2) "Not be last"
+-250 pt/round: Hi Back(P4) "My opponent record"
+cBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+Bcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-182 pt/round: Team Masters(P2) "Not be last"
+-296 pt/round: 6pythons(P5) "Winning_Strategy"
+CcbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbb
+CBbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbb
+
+BbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbb
+cbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbb
+
+--------------------------------------------------------------------------------
+-20 pt/round: Team Masters(P2) "Not be last"
+-414 pt/round: Team 7(P6) "Betray every third round"
+cBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbB
+Bccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbc
+
+BbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBb
+cbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccb
+
+--------------------------------------------------------------------------------
+0 pt/round: Team Masters(P2) "Not be last"
+0 pt/round: Team South(P7) "Reverse Psychology"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-250 pt/round: Team Masters(P2) "Not be last"
+-250 pt/round: Team 9(P8) "Betray until we win"
+cBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+Bcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+0 pt/round: Team Masters(P2) "Not be last"
+0 pt/round: 10(P9) "Collude first 140 rounds unless betrayed. Betray 141st round forward."
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+0 pt/round: Team Masters(P2) "Not be last"
+0 pt/round: teamAbeRoy(P10) "letsPracticeStrategy"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCC
+CCC
+
+--------------------------------------------------------------------------------
+-250 pt/round: Team Masters(P2) "Not be last"
+-250 pt/round: JCC(P11) "4th Quarter Push"
+cBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+Bcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-249 pt/round: Team Masters(P2) "Not be last"
+-249 pt/round: Blackford(P12) "TitForTat"
+CcbBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+CBbcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+0 pt/round: Team Masters(P2) "Not be last"
+0 pt/round: The name the team gives to itself(P13) "The name the team gives to this strategy"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Section 3 - Game Data for Team SODAN
+--------------------------------------------------------------------------------
+-231 pt/round: SODAN(P3) "Collude every now and again"
+-234 pt/round: Lifers(P0) "Come at me"
+CBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcB
+CcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBc
+
+bbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbb
+bbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbb
+
+bbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBb
+bbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcb
+
+--------------------------------------------------------------------------------
+-293 pt/round: SODAN(P3) "Collude every now and again"
+-191 pt/round: Not Yet!(P1) "Reduce chance of colluding to near zero."
+cbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcb
+BbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBb
+
+bbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbb
+bbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbb
+
+--------------------------------------------------------------------------------
+-288 pt/round: SODAN(P3) "Collude every now and again"
+-193 pt/round: Team Masters(P2) "Not be last"
+CBbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcb
+CcbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBb
+
+bbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcb
+bbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBb
+
+--------------------------------------------------------------------------------
+-290 pt/round: SODAN(P3) "Collude every now and again"
+-193 pt/round: Hi Back(P4) "My opponent record"
+cBbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcb
+BcbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBb
+
+bbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbb
+bbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbb
+
+bbcbbbb
+bbBbbbb
+
+--------------------------------------------------------------------------------
+-216 pt/round: SODAN(P3) "Collude every now and again"
+-237 pt/round: 6pythons(P5) "Winning_Strategy"
+CbbbbBcbbbBbcbbBbbcbBbbbcBbbbbCbbbbBcbbbBbcbbBbbcbBbbbcBbbbbCbbbbBcbbbBbcbbBbbcb
+CbbbbcBbbbcbBbbcbbBbcbbbBcbbbbCbbbbcBbbbcbBbbcbbBbcbbbBcbbbbCbbbbcBbbbcbBbbcbbBb
+
+BbbbcBbbbbCbbbbBcbbbBbcbbBbbcbBbbbcBbbbbCbbbbBcbbbBbcbbBbbcbBbbbcBbbbbCbbbbBcbbb
+cbbbBcbbbbCbbbbcBbbbcbBbbcbbBbcbbbBcbbbbCbbbbcBbbbcbBbbcbbBbcbbbBcbbbbCbbbbcBbbb
+
+BbcbbBbbcbBbbbcBbbbbCbbbbBcbbbBbcbbBbb
+cbBbbcbbBbcbbbBcbbbbCbbbbcBbbbcbBbbcbb
+
+--------------------------------------------------------------------------------
+-59 pt/round: SODAN(P3) "Collude every now and again"
+-359 pt/round: Team 7(P6) "Betray every third round"
+cBBbBBcBBbBBcBBbBBcBBbBBcBBbBBcBBbBBcBBbBBcBBbBBcBBbBBcBBbBBcBBbBBcBBbBBcBBbBBcB
+BccbccBccbccBccbccBccbccBccbccBccbccBccbccBccbccBccbccBccbccBccbccBccbccBccbccBc
+
+BbBBcBBbBBcBBbBBcBBbBBcBBbBBcBBbBBcBBbBBcBBbBBcBBbBBcBBbBBcBBbBBcBBbBBcBBbBBcBBb
+cbccBccbccBccbccBccbccBccbccBccbccBccbccBccbccBccbccBccbccBccbccBccbccBccbccBccb
+
+BBcBBbBBcBBbBB
+ccBccbccBccbcc
+
+--------------------------------------------------------------------------------
+-169 pt/round: SODAN(P3) "Collude every now and again"
+-278 pt/round: Team South(P7) "Reverse Psychology"
+CBBBBbcBbBbbcBbBbbcBbBbbcBbBbbcBbBbbcBbBbbcBbBbbcBbBbbcBbBbbcBbBbbcBbBbbcBbBbbcB
+CccccbBcbcbbBcbcbbBcbcbbBcbcbbBcbcbbBcbcbbBcbcbbBcbcbbBcbcbbBcbcbbBcbcbbBcbcbbBc
+
+bBbbcBbBbbcBbBbbcBbBbbcBbBbbcBbBbbcBbBbbcBbBbbcBbBbbcBbBbbcBbBbbcBbBbbcBbBbbcBbB
+bcbbBcbcbbBcbcbbBcbcbbBcbcbbBcbcbbBcbcbbBcbcbbBcbcbbBcbcbbBcbcbbBcbcbbBcbcbbBcbc
+
+bbcBb
+bbBcb
+
+--------------------------------------------------------------------------------
+-234 pt/round: SODAN(P3) "Collude every now and again"
+-234 pt/round: Team 9(P8) "Betray until we win"
+cBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcB
+BcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBc
+
+bbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbb
+bbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbb
+
+--------------------------------------------------------------------------------
+-286 pt/round: SODAN(P3) "Collude every now and again"
+-194 pt/round: 10(P9) "Collude first 140 rounds unless betrayed. Betray 141st round forward."
+CBbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcb
+CcbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBb
+
+bbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbb
+bbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbb
+
+--------------------------------------------------------------------------------
+-286 pt/round: SODAN(P3) "Collude every now and again"
+-194 pt/round: teamAbeRoy(P10) "letsPracticeStrategy"
+CBbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcb
+CcbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBb
+
+bbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbb
+bbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbb
+
+--------------------------------------------------------------------------------
+-234 pt/round: SODAN(P3) "Collude every now and again"
+-234 pt/round: JCC(P11) "4th Quarter Push"
+cBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcB
+BcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBc
+
+bbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbb
+bbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbb
+
+bbcBbbbbcBbbbbcBbbbbcBbbbbcBb
+bbBcbbbbBcbbbbBcbbbbBcbbbbBcb
+
+--------------------------------------------------------------------------------
+-232 pt/round: SODAN(P3) "Collude every now and again"
+-235 pt/round: Blackford(P12) "TitForTat"
+cBBbbbcbBbbbcbBbbbcbBbbbcbBbbbcbBbbbcbBbbbcbBbbbcbBbbbcbBbbbcbBbbbcbBbbbcbBbbbcb
+BccbbbBbcbbbBbcbbbBbcbbbBbcbbbBbcbbbBbcbbbBbcbbbBbcbbbBbcbbbBbcbbbBbcbbbBbcbbbBb
+
+BbbbcbBbbbcbBbbbcbBbbbcbBbbbcbBbbbcbBbbbcbBbbbcbBbbbcbBbbbcbBbbbcbBbbbcbBbbbcbBb
+cbbbBbcbbbBbcbbbBbcbbbBbcbbbBbcbbbBbcbbbBbcbbbBbcbbbBbcbbbBbcbbbBbcbbbBbcbbbBbcb
+
+bbcbBbbbcbBbbbcbBbbbcbBb
+bbBbcbbbBbcbbbBbcbbbBbcb
+
+--------------------------------------------------------------------------------
+82 pt/round: SODAN(P3) "Collude every now and again"
+-414 pt/round: The name the team gives to itself(P13) "The name the team gives to this strategy"
+CBBBBBCBBBBBCBBBBBCBBBBBCBBBBBCBBBBBCBBBBBCBBBBBCBBBBBCBBBBBCBBBBBCBBBBBCBBBBBCB
+CcccccCcccccCcccccCcccccCcccccCcccccCcccccCcccccCcccccCcccccCcccccCcccccCcccccCc
+
+BBBBCBBBBBCBBBBBCBBBBBCBBBBBCBBBBBCBBBBBCBBBBBC
+ccccCcccccCcccccCcccccCcccccCcccccCcccccCcccccC
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Section 3 - Game Data for Team Hi Back
+--------------------------------------------------------------------------------
+-249 pt/round: Hi Back(P4) "My opponent record"
+-249 pt/round: Lifers(P0) "Come at me"
+BcBcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+cBcBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-250 pt/round: Hi Back(P4) "My opponent record"
+-250 pt/round: Not Yet!(P1) "Reduce chance of colluding to near zero."
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-250 pt/round: Hi Back(P4) "My opponent record"
+-250 pt/round: Team Masters(P2) "Not be last"
+Bcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+cBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-193 pt/round: Hi Back(P4) "My opponent record"
+-290 pt/round: SODAN(P3) "Collude every now and again"
+BcbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBb
+cBbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcb
+
+bbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbb
+bbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbb
+
+bbBbbbb
+bbcbbbb
+
+--------------------------------------------------------------------------------
+-181 pt/round: Hi Back(P4) "My opponent record"
+-299 pt/round: 6pythons(P5) "Winning_Strategy"
+BcbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbb
+cBbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbb
+
+BbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBb
+cbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcb
+
+--------------------------------------------------------------------------------
+-166 pt/round: Hi Back(P4) "My opponent record"
+22 pt/round: Team 7(P6) "Betray every third round"
+bBBcBCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcC
+bccBcCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBC
+
+CcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCc
+CBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCB
+
+CCcCCcCCc
+CCBCCBCCB
+
+--------------------------------------------------------------------------------
+0 pt/round: Hi Back(P4) "My opponent record"
+-5 pt/round: Team South(P7) "Reverse Psychology"
+BCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+cCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-250 pt/round: Hi Back(P4) "My opponent record"
+-250 pt/round: Team 9(P8) "Betray until we win"
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-250 pt/round: Hi Back(P4) "My opponent record"
+-250 pt/round: 10(P9) "Collude first 140 rounds unless betrayed. Betray 141st round forward."
+Bcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+cBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-250 pt/round: Hi Back(P4) "My opponent record"
+-250 pt/round: teamAbeRoy(P10) "letsPracticeStrategy"
+Bcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+cBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-250 pt/round: Hi Back(P4) "My opponent record"
+-250 pt/round: JCC(P11) "4th Quarter Push"
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-246 pt/round: Hi Back(P4) "My opponent record"
+-253 pt/round: Blackford(P12) "TitForTat"
+bBBcbBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bccBbcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+0 pt/round: Hi Back(P4) "My opponent record"
+-5 pt/round: The name the team gives to itself(P13) "The name the team gives to this strategy"
+BCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+cCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Section 3 - Game Data for Team 6pythons
+--------------------------------------------------------------------------------
+-243 pt/round: 6pythons(P5) "Winning_Strategy"
+-220 pt/round: Lifers(P0) "Come at me"
+CBbbbcBbbbcBbbbcbbbbcBbbbcBbbbcBbbbcbbbbcBbbbcBbbbcBbbbcbbbbcBbbbcBbbbcBbbbcbbbb
+CcbbbBcbbbBcbbbBbbbbBcbbbBcbbbBcbbbBbbbbBcbbbBcbbbBcbbbBbbbbBcbbbBcbbbBcbbbBbbbb
+
+cBbbbcBbbbcBbbbcbbbbcBbbbcBbbbcBbbbcbbbbcBbbbcBbbbcBbbbcbbbbcBbbbcBbbbcBbb
+BcbbbBcbbbBcbbbBbbbbBcbbbBcbbbBcbbbBbbbbBcbbbBcbbbBcbbbBbbbbBcbbbBcbbbBcbb
+
+--------------------------------------------------------------------------------
+-301 pt/round: 6pythons(P5) "Winning_Strategy"
+-179 pt/round: Not Yet!(P1) "Reduce chance of colluding to near zero."
+cbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbb
+BbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbb
+
+cbbbbcbbbbcbbbbcbbbbcbb
+BbbbbBbbbbBbbbbBbbbbBbb
+
+--------------------------------------------------------------------------------
+-296 pt/round: 6pythons(P5) "Winning_Strategy"
+-182 pt/round: Team Masters(P2) "Not be last"
+CBbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbb
+CcbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbb
+
+cbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbb
+BbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbb
+
+--------------------------------------------------------------------------------
+-237 pt/round: 6pythons(P5) "Winning_Strategy"
+-216 pt/round: SODAN(P3) "Collude every now and again"
+CbbbbcBbbbcbBbbcbbBbcbbbBcbbbbCbbbbcBbbbcbBbbcbbBbcbbbBcbbbbCbbbbcBbbbcbBbbcbbBb
+CbbbbBcbbbBbcbbBbbcbBbbbcBbbbbCbbbbBcbbbBbcbbBbbcbBbbbcBbbbbCbbbbBcbbbBbcbbBbbcb
+
+cbbbBcbbbbCbbbbcBbbbcbBbbcbbBbcbbbBcbbbbCbbbbcBbbbcbBbbcbbBbcbbbBcbbbbCbbbbcBbbb
+BbbbcBbbbbCbbbbBcbbbBbcbbBbbcbBbbbcBbbbbCbbbbBcbbbBbcbbBbbcbBbbbcBbbbbCbbbbBcbbb
+
+cbBbbcbbBbcbbbBcbbbbCbbbbcBbbbcbBbbcbb
+BbcbbBbbcbBbbbcBbbbbCbbbbBcbbbBbcbbBbb
+
+--------------------------------------------------------------------------------
+-299 pt/round: 6pythons(P5) "Winning_Strategy"
+-181 pt/round: Hi Back(P4) "My opponent record"
+cBbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbb
+BcbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbb
+
+cbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcb
+BbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBb
+
+--------------------------------------------------------------------------------
+-49 pt/round: 6pythons(P5) "Winning_Strategy"
+-326 pt/round: Team 7(P6) "Betray every third round"
+cBBbBCbBBbCBbBBcBBbBCbBBbCBbBBcBBbBCbBBbCBbBBcBBbBCbBBbCBbBBcBBbBCbBBbCBbBBcBBbB
+BccbcCbccbCcbccBccbcCbccbCcbccBccbcCbccbCcbccBccbcCbccbCcbccBccbcCbccbCcbccBccbc
+
+CbBBbCBbBBcBBbBCbBBbCBbBBcBBbBCbBBbCBbBBcBBbBCbBBbCBbBBcBBbBCbBBbCBbBBcBBbBCbBBb
+CbccbCcbccBccbcCbccbCcbccBccbcCbccbCcbccBccbcCbccbCcbccBccbcCbccbCcbccBccbcCbccb
+
+--------------------------------------------------------------------------------
+-155 pt/round: 6pythons(P5) "Winning_Strategy"
+-283 pt/round: Team South(P7) "Reverse Psychology"
+CBBBBcBbBbcBbBbcBbBbcBbBbcBbBbcBbBbcBbBbcBbBbcBbBbcBbBbcBbBbcBbBbcBbBbcBbBbcBbBb
+CccccBcbcbBcbcbBcbcbBcbcbBcbcbBcbcbBcbcbBcbcbBcbcbBcbcbBcbcbBcbcbBcbcbBcbcbBcbcb
+
+cBbBbcBbBbcBbBbcBbBbcBbBbcBbBbcBbBbcBbBbcBbBbcBbBbcBbBbcBbBbcBbBbcBbBbcBbBbcBbBb
+BcbcbBcbcbBcbcbBcbcbBcbcbBcbcbBcbcbBcbcbBcbcbBcbcbBcbcbBcbcbBcbcbBcbcbBcbcbBcbcb
+
+cBbBbcBbBbcBbBbcBbBbcBbBbcBbBbcBbBbcB
+BcbcbBcbcbBcbcbBcbcbBcbcbBcbcbBcbcbBc
+
+--------------------------------------------------------------------------------
+-230 pt/round: 6pythons(P5) "Winning_Strategy"
+-230 pt/round: Team 9(P8) "Betray until we win"
+cBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbb
+BcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbb
+
+cBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbb
+BcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbb
+
+cBbbbcBbb
+BcbbbBcbb
+
+--------------------------------------------------------------------------------
+-295 pt/round: 6pythons(P5) "Winning_Strategy"
+-182 pt/round: 10(P9) "Collude first 140 rounds unless betrayed. Betray 141st round forward."
+CBbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbb
+CcbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbb
+
+cbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcb
+BbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBb
+
+--------------------------------------------------------------------------------
+-295 pt/round: 6pythons(P5) "Winning_Strategy"
+-182 pt/round: teamAbeRoy(P10) "letsPracticeStrategy"
+CBbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbb
+CcbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbb
+
+cbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbb
+BbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbb
+
+--------------------------------------------------------------------------------
+-230 pt/round: 6pythons(P5) "Winning_Strategy"
+-230 pt/round: JCC(P11) "4th Quarter Push"
+cBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbb
+BcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbb
+
+cBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbb
+BcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbb
+
+cBb
+Bcb
+
+--------------------------------------------------------------------------------
+-231 pt/round: 6pythons(P5) "Winning_Strategy"
+-228 pt/round: Blackford(P12) "TitForTat"
+CbbbbcbBbbcbBbbcbBbbcbBbbcbBbbcbBbbcbBbbcbBbbcbBbbcbBbbcbBbbcbBbbcbBbbcbBbbcbBbb
+CbbbbBbcbbBbcbbBbcbbBbcbbBbcbbBbcbbBbcbbBbcbbBbcbbBbcbbBbcbbBbcbbBbcbbBbcbbBbcbb
+
+cbBbbcbBbbcbBbbcbBbbcbBbbcbBbbcbBbbcbBbbcbBbbcbBbbcbBbbcbBbbcbBbbcbBbbcbBbbcbBbb
+BbcbbBbcbbBbcbbBbcbbBbcbbBbcbbBbcbbBbcbbBbcbbBbcbbBbcbbBbcbbBbcbbBbcbbBbcbbBbcbb
+
+cb
+Bb
+
+--------------------------------------------------------------------------------
+80 pt/round: 6pythons(P5) "Winning_Strategy"
+-400 pt/round: The name the team gives to itself(P13) "The name the team gives to this strategy"
+CBBBBCBBBBCBBBBCBBBBCBBBBCBBBBCBBBBCBBBBCBBBBCBBBBCBBBBCBBBBCBBBBCBBBBCBBBBCBBBB
+CccccCccccCccccCccccCccccCccccCccccCccccCccccCccccCccccCccccCccccCccccCccccCcccc
+
+CBBBBCBBBBCBBBBCBBBBCBBBBCBBBB
+CccccCccccCccccCccccCccccCcccc
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Section 3 - Game Data for Team Team 7
+--------------------------------------------------------------------------------
+-203 pt/round: Team 7(P6) "Betray every third round"
+-107 pt/round: Lifers(P0) "Come at me"
+BcCBcCBccBcCbcCBcCBccBcCbcCBcCBccBcCbcCBcCBccBcCbcCBcCBccBcCbcCBcCBccBcCbcCBcCBc
+cBCcBCcBBcBCbBCcBCcBBcBCbBCcBCcBBcBCbBCcBCcBBcBCbBCcBCcBBcBCbBCcBCcBBcBCbBCcBCcB
+
+cBcCbcCBcCBccBcCbcCBcCBccBcCbcCBcCBccBcCbcCBcCBccBcCbcCBcCBccBcCbcCBcCBccBcCb
+BcBCbBCcBCcBBcBCbBCcBCcBBcBCbBCcBCcBBcBCbBCcBCcBBcBCbBCcBCcBBcBCbBCcBCcBBcBCb
+
+--------------------------------------------------------------------------------
+-417 pt/round: Team 7(P6) "Betray every third round"
+-17 pt/round: Not Yet!(P1) "Reduce chance of colluding to near zero."
+bccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbc
+bBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbB
+
+cbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbcc
+BbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBB
+
+--------------------------------------------------------------------------------
+-414 pt/round: Team 7(P6) "Betray every third round"
+-20 pt/round: Team Masters(P2) "Not be last"
+Bccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbc
+cBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbB
+
+cbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccb
+BbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBb
+
+--------------------------------------------------------------------------------
+-359 pt/round: Team 7(P6) "Betray every third round"
+-59 pt/round: SODAN(P3) "Collude every now and again"
+BccbccBccbccBccbccBccbccBccbccBccbccBccbccBccbccBccbccBccbccBccbccBccbccBccbccBc
+cBBbBBcBBbBBcBBbBBcBBbBBcBBbBBcBBbBBcBBbBBcBBbBBcBBbBBcBBbBBcBBbBBcBBbBBcBBbBBcB
+
+cbccBccbccBccbccBccbccBccbccBccbccBccbccBccbccBccbccBccbccBccbccBccbccBccbccBccb
+BbBBcBBbBBcBBbBBcBBbBBcBBbBBcBBbBBcBBbBBcBBbBBcBBbBBcBBbBBcBBbBBcBBbBBcBBbBBcBBb
+
+ccBccbccBccbcc
+BBcBBbBBcBBbBB
+
+--------------------------------------------------------------------------------
+22 pt/round: Team 7(P6) "Betray every third round"
+-166 pt/round: Hi Back(P4) "My opponent record"
+bccBcCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBC
+bBBcBCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcC
+
+CBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCB
+CcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCc
+
+CCBCCBCCB
+CCcCCcCCc
+
+--------------------------------------------------------------------------------
+-326 pt/round: Team 7(P6) "Betray every third round"
+-49 pt/round: 6pythons(P5) "Winning_Strategy"
+BccbcCbccbCcbccBccbcCbccbCcbccBccbcCbccbCcbccBccbcCbccbCcbccBccbcCbccbCcbccBccbc
+cBBbBCbBBbCBbBBcBBbBCbBBbCBbBBcBBbBCbBBbCBbBBcBBbBCbBBbCBbBBcBBbBCbBBbCBbBBcBBbB
+
+CbccbCcbccBccbcCbccbCcbccBccbcCbccbCcbccBccbcCbccbCcbccBccbcCbccbCcbccBccbcCbccb
+CbBBbCBbBBcBBbBCbBBbCBbBBcBBbBCbBBbCBbBBcBBbBCbBBbCBbBBcBBbBCbBBbCBbBBcBBbBCbBBb
+
+--------------------------------------------------------------------------------
+-242 pt/round: Team 7(P6) "Betray every third round"
+-55 pt/round: Team South(P7) "Reverse Psychology"
+BCCBCCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbc
+cCCcCCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbB
+
+CbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCb
+CbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCb
+
+cCbcCbcCbcCbcCbc
+BCbBCbBCbBCbBCbB
+
+--------------------------------------------------------------------------------
+-134 pt/round: Team 7(P6) "Betray every third round"
+-134 pt/round: Team 9(P8) "Betray until we win"
+bcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBc
+bBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcB
+
+CBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCB
+CcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCc
+
+cCBcCBcCBcCBcCB
+BCcBCcBCcBCcBCc
+
+--------------------------------------------------------------------------------
+-414 pt/round: Team 7(P6) "Betray every third round"
+-20 pt/round: 10(P9) "Collude first 140 rounds unless betrayed. Betray 141st round forward."
+Bccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbc
+cBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbB
+
+cbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccb
+BbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBb
+
+ccbccbccbccbccbccbccbccbccbccbccb
+BBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBb
+
+--------------------------------------------------------------------------------
+-412 pt/round: Team 7(P6) "Betray every third round"
+-22 pt/round: teamAbeRoy(P10) "letsPracticeStrategy"
+Bccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbc
+cBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbB
+
+cbccbccbccbccbccbccbccb
+BbBBbBBbBBbBBbBBbBBbBBb
+
+--------------------------------------------------------------------------------
+-135 pt/round: Team 7(P6) "Betray every third round"
+-135 pt/round: JCC(P11) "4th Quarter Push"
+bcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBc
+bBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcB
+
+CBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCB
+CcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCc
+
+--------------------------------------------------------------------------------
+-135 pt/round: Team 7(P6) "Betray every third round"
+-135 pt/round: Blackford(P12) "TitForTat"
+bCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBC
+bCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcC
+
+cBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcB
+BcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBc
+
+--------------------------------------------------------------------------------
+33 pt/round: Team 7(P6) "Betray every third round"
+-169 pt/round: The name the team gives to itself(P13) "The name the team gives to this strategy"
+BCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBC
+cCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcC
+
+CBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCB
+CcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCc
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Section 3 - Game Data for Team Team South
+--------------------------------------------------------------------------------
+-196 pt/round: Team South(P7) "Reverse Psychology"
+-192 pt/round: Lifers(P0) "Come at me"
+CCCCcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcB
+CCCCBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBc
+
+cBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBc
+BcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcB
+
+--------------------------------------------------------------------------------
+-258 pt/round: Team South(P7) "Reverse Psychology"
+-240 pt/round: Not Yet!(P1) "Reduce chance of colluding to near zero."
+cccccbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+BBBBBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbb
+bbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+0 pt/round: Team South(P7) "Reverse Psychology"
+0 pt/round: Team Masters(P2) "Not be last"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-278 pt/round: Team South(P7) "Reverse Psychology"
+-169 pt/round: SODAN(P3) "Collude every now and again"
+CccccbBcbcbbBcbcbbBcbcbbBcbcbbBcbcbbBcbcbbBcbcbbBcbcbbBcbcbbBcbcbbBcbcbbBcbcbbBc
+CBBBBbcBbBbbcBbBbbcBbBbbcBbBbbcBbBbbcBbBbbcBbBbbcBbBbbcBbBbbcBbBbbcBbBbbcBbBbbcB
+
+bcbbBcbcbbBcbcbbBcbcbbBcbcbbBcbcbbBcbcbbBcbcbbBcbcbbBcbcbbBcbcbbBcbcbbBcbcbbBcbc
+bBbbcBbBbbcBbBbbcBbBbbcBbBbbcBbBbbcBbBbbcBbBbbcBbBbbcBbBbbcBbBbbcBbBbbcBbBbbcBbB
+
+bbBcb
+bbcBb
+
+--------------------------------------------------------------------------------
+-5 pt/round: Team South(P7) "Reverse Psychology"
+0 pt/round: Hi Back(P4) "My opponent record"
+cCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+BCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-283 pt/round: Team South(P7) "Reverse Psychology"
+-155 pt/round: 6pythons(P5) "Winning_Strategy"
+CccccBcbcbBcbcbBcbcbBcbcbBcbcbBcbcbBcbcbBcbcbBcbcbBcbcbBcbcbBcbcbBcbcbBcbcbBcbcb
+CBBBBcBbBbcBbBbcBbBbcBbBbcBbBbcBbBbcBbBbcBbBbcBbBbcBbBbcBbBbcBbBbcBbBbcBbBbcBbBb
+
+BcbcbBcbcbBcbcbBcbcbBcbcbBcbcbBcbcbBcbcbBcbcbBcbcbBcbcbBcbcbBcbcbBcbcbBcbcbBcbcb
+cBbBbcBbBbcBbBbcBbBbcBbBbcBbBbcBbBbcBbBbcBbBbcBbBbcBbBbcBbBbcBbBbcBbBbcBbBbcBbBb
+
+BcbcbBcbcbBcbcbBcbcbBcbcbBcbcbBcbcbBc
+cBbBbcBbBbcBbBbcBbBbcBbBbcBbBbcBbBbcB
+
+--------------------------------------------------------------------------------
+-55 pt/round: Team South(P7) "Reverse Psychology"
+-242 pt/round: Team 7(P6) "Betray every third round"
+cCCcCCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbB
+BCCBCCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbc
+
+CbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCbBCb
+CbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCbcCb
+
+BCbBCbBCbBCbBCbB
+cCbcCbcCbcCbcCbc
+
+--------------------------------------------------------------------------------
+-3 pt/round: Team South(P7) "Reverse Psychology"
+0 pt/round: Team 9(P8) "Betray until we win"
+cCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+BCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCC
+CCCCCCC
+
+--------------------------------------------------------------------------------
+-33 pt/round: Team South(P7) "Reverse Psychology"
+-26 pt/round: 10(P9) "Collude first 140 rounds unless betrayed. Betray 141st round forward."
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCcbcbbbbbb
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCBbBbbbbbb
+
+bbbbbbbbbbb
+bbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+0 pt/round: Team South(P7) "Reverse Psychology"
+0 pt/round: teamAbeRoy(P10) "letsPracticeStrategy"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-5 pt/round: Team South(P7) "Reverse Psychology"
+0 pt/round: JCC(P11) "4th Quarter Push"
+cCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+BCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-162 pt/round: Team South(P7) "Reverse Psychology"
+-158 pt/round: Blackford(P12) "TitForTat"
+cCcCCBCcBCbBcbCcBCbBcbCcBCbBcbCcBCbBcbCcBCbBcbCcBCbBcbCcBCbBcbCcBCbBcbCcBCbBcbCc
+BCBCCcCBcCbcBbCBcCbcBbCBcCbcBbCBcCbcBbCBcCbcBbCBcCbcBbCBcCbcBbCBcCbcBbCBcCbcBbCB
+
+BCbBcbCcBCbBcbCcBCbBcbCcBCbBcbCcBCbBcbCcBCbBcbCcBCbBcbCcBCbBcb
+cCbcBbCBcCbcBbCBcCbcBbCBcCbcBbCBcCbcBbCBcCbcBbCBcCbcBbCBcCbcBb
+
+--------------------------------------------------------------------------------
+0 pt/round: Team South(P7) "Reverse Psychology"
+0 pt/round: The name the team gives to itself(P13) "The name the team gives to this strategy"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Section 3 - Game Data for Team Team 9
+--------------------------------------------------------------------------------
+-249 pt/round: Team 9(P8) "Betray until we win"
+-249 pt/round: Lifers(P0) "Come at me"
+BcBcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+cBcBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-250 pt/round: Team 9(P8) "Betray until we win"
+-250 pt/round: Not Yet!(P1) "Reduce chance of colluding to near zero."
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-250 pt/round: Team 9(P8) "Betray until we win"
+-250 pt/round: Team Masters(P2) "Not be last"
+Bcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+cBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-234 pt/round: Team 9(P8) "Betray until we win"
+-234 pt/round: SODAN(P3) "Collude every now and again"
+BcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBc
+cBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcB
+
+bbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbb
+bbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbb
+
+--------------------------------------------------------------------------------
+-250 pt/round: Team 9(P8) "Betray until we win"
+-250 pt/round: Hi Back(P4) "My opponent record"
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-230 pt/round: Team 9(P8) "Betray until we win"
+-230 pt/round: 6pythons(P5) "Winning_Strategy"
+BcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbb
+cBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbb
+
+BcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbb
+cBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbb
+
+BcbbbBcbb
+cBbbbcBbb
+
+--------------------------------------------------------------------------------
+-134 pt/round: Team 9(P8) "Betray until we win"
+-134 pt/round: Team 7(P6) "Betray every third round"
+bBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcB
+bcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBc
+
+CcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCc
+CBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCB
+
+BCcBCcBCcBCcBCc
+cCBcCBcCBcCBcCB
+
+--------------------------------------------------------------------------------
+0 pt/round: Team 9(P8) "Betray until we win"
+-3 pt/round: Team South(P7) "Reverse Psychology"
+BCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+cCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCC
+CCCCCCC
+
+--------------------------------------------------------------------------------
+-250 pt/round: Team 9(P8) "Betray until we win"
+-250 pt/round: 10(P9) "Collude first 140 rounds unless betrayed. Betray 141st round forward."
+Bcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+cBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-250 pt/round: Team 9(P8) "Betray until we win"
+-250 pt/round: teamAbeRoy(P10) "letsPracticeStrategy"
+Bcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+cBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-250 pt/round: Team 9(P8) "Betray until we win"
+-250 pt/round: JCC(P11) "4th Quarter Push"
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-133 pt/round: Team 9(P8) "Betray until we win"
+-136 pt/round: Blackford(P12) "TitForTat"
+BCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBC
+cCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcC
+
+cBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcB
+BcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBc
+
+CcBCcBCcBCcBCcBCcB
+CBcCBcCBcCBcCBcCBc
+
+--------------------------------------------------------------------------------
+0 pt/round: Team 9(P8) "Betray until we win"
+-3 pt/round: The name the team gives to itself(P13) "The name the team gives to this strategy"
+BCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+cCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Section 3 - Game Data for Team 10
+--------------------------------------------------------------------------------
+-242 pt/round: 10(P9) "Collude first 140 rounds unless betrayed. Betray 141st round forward."
+-242 pt/round: Lifers(P0) "Come at me"
+CCCCcBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+CCCCBcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-253 pt/round: 10(P9) "Collude first 140 rounds unless betrayed. Betray 141st round forward."
+-248 pt/round: Not Yet!(P1) "Reduce chance of colluding to near zero."
+cbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+Bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+0 pt/round: 10(P9) "Collude first 140 rounds unless betrayed. Betray 141st round forward."
+0 pt/round: Team Masters(P2) "Not be last"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-194 pt/round: 10(P9) "Collude first 140 rounds unless betrayed. Betray 141st round forward."
+-286 pt/round: SODAN(P3) "Collude every now and again"
+CcbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBb
+CBbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcb
+
+bbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbb
+bbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbb
+
+--------------------------------------------------------------------------------
+-250 pt/round: 10(P9) "Collude first 140 rounds unless betrayed. Betray 141st round forward."
+-250 pt/round: Hi Back(P4) "My opponent record"
+cBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+Bcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-182 pt/round: 10(P9) "Collude first 140 rounds unless betrayed. Betray 141st round forward."
+-295 pt/round: 6pythons(P5) "Winning_Strategy"
+CcbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbb
+CBbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbb
+
+BbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBb
+cbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcb
+
+--------------------------------------------------------------------------------
+-20 pt/round: 10(P9) "Collude first 140 rounds unless betrayed. Betray 141st round forward."
+-414 pt/round: Team 7(P6) "Betray every third round"
+cBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbB
+Bccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbc
+
+BbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBb
+cbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccb
+
+BBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBb
+ccbccbccbccbccbccbccbccbccbccbccb
+
+--------------------------------------------------------------------------------
+-26 pt/round: 10(P9) "Collude first 140 rounds unless betrayed. Betray 141st round forward."
+-33 pt/round: Team South(P7) "Reverse Psychology"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCBbBbbbbbb
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCcbcbbbbbb
+
+bbbbbbbbbbb
+bbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-250 pt/round: 10(P9) "Collude first 140 rounds unless betrayed. Betray 141st round forward."
+-250 pt/round: Team 9(P8) "Betray until we win"
+cBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+Bcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-12 pt/round: 10(P9) "Collude first 140 rounds unless betrayed. Betray 141st round forward."
+-16 pt/round: teamAbeRoy(P10) "letsPracticeStrategy"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCBbbbbbbbb
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCcbbbbbbbb
+
+--------------------------------------------------------------------------------
+-250 pt/round: 10(P9) "Collude first 140 rounds unless betrayed. Betray 141st round forward."
+-250 pt/round: JCC(P11) "4th Quarter Push"
+cBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+Bcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-252 pt/round: 10(P9) "Collude first 140 rounds unless betrayed. Betray 141st round forward."
+-249 pt/round: Blackford(P12) "TitForTat"
+cbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+Bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+0 pt/round: 10(P9) "Collude first 140 rounds unless betrayed. Betray 141st round forward."
+0 pt/round: The name the team gives to itself(P13) "The name the team gives to this strategy"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Section 3 - Game Data for Team teamAbeRoy
+--------------------------------------------------------------------------------
+-241 pt/round: teamAbeRoy(P10) "letsPracticeStrategy"
+-241 pt/round: Lifers(P0) "Come at me"
+CCCCcBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+CCCCBcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-252 pt/round: teamAbeRoy(P10) "letsPracticeStrategy"
+-248 pt/round: Not Yet!(P1) "Reduce chance of colluding to near zero."
+cbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+Bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+0 pt/round: teamAbeRoy(P10) "letsPracticeStrategy"
+0 pt/round: Team Masters(P2) "Not be last"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCC
+CCC
+
+--------------------------------------------------------------------------------
+-194 pt/round: teamAbeRoy(P10) "letsPracticeStrategy"
+-286 pt/round: SODAN(P3) "Collude every now and again"
+CcbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBb
+CBbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcb
+
+bbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbbBbbbbb
+bbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbbcbbbbb
+
+--------------------------------------------------------------------------------
+-250 pt/round: teamAbeRoy(P10) "letsPracticeStrategy"
+-250 pt/round: Hi Back(P4) "My opponent record"
+cBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+Bcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-182 pt/round: teamAbeRoy(P10) "letsPracticeStrategy"
+-295 pt/round: 6pythons(P5) "Winning_Strategy"
+CcbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbb
+CBbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbb
+
+BbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbbbbBbb
+cbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbbbbcbb
+
+--------------------------------------------------------------------------------
+-22 pt/round: teamAbeRoy(P10) "letsPracticeStrategy"
+-412 pt/round: Team 7(P6) "Betray every third round"
+cBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbBBbB
+Bccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbc
+
+BbBBbBBbBBbBBbBBbBBbBBb
+cbccbccbccbccbccbccbccb
+
+--------------------------------------------------------------------------------
+0 pt/round: teamAbeRoy(P10) "letsPracticeStrategy"
+0 pt/round: Team South(P7) "Reverse Psychology"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-250 pt/round: teamAbeRoy(P10) "letsPracticeStrategy"
+-250 pt/round: Team 9(P8) "Betray until we win"
+cBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+Bcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-16 pt/round: teamAbeRoy(P10) "letsPracticeStrategy"
+-12 pt/round: 10(P9) "Collude first 140 rounds unless betrayed. Betray 141st round forward."
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCcbbbbbbbb
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCBbbbbbbbb
+
+--------------------------------------------------------------------------------
+-250 pt/round: teamAbeRoy(P10) "letsPracticeStrategy"
+-250 pt/round: JCC(P11) "4th Quarter Push"
+cBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+Bcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-244 pt/round: teamAbeRoy(P10) "letsPracticeStrategy"
+-250 pt/round: Blackford(P12) "TitForTat"
+CcBBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+CBccbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+0 pt/round: teamAbeRoy(P10) "letsPracticeStrategy"
+0 pt/round: The name the team gives to itself(P13) "The name the team gives to this strategy"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Section 3 - Game Data for Team JCC
+--------------------------------------------------------------------------------
+-248 pt/round: JCC(P11) "4th Quarter Push"
+-248 pt/round: Lifers(P0) "Come at me"
+BcBcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+cBcBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-250 pt/round: JCC(P11) "4th Quarter Push"
+-250 pt/round: Not Yet!(P1) "Reduce chance of colluding to near zero."
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-250 pt/round: JCC(P11) "4th Quarter Push"
+-250 pt/round: Team Masters(P2) "Not be last"
+Bcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+cBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-234 pt/round: JCC(P11) "4th Quarter Push"
+-234 pt/round: SODAN(P3) "Collude every now and again"
+BcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBc
+cBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcB
+
+bbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbbbbBcbb
+bbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbbbbcBbb
+
+bbBcbbbbBcbbbbBcbbbbBcbbbbBcb
+bbcBbbbbcBbbbbcBbbbbcBbbbbcBb
+
+--------------------------------------------------------------------------------
+-250 pt/round: JCC(P11) "4th Quarter Push"
+-250 pt/round: Hi Back(P4) "My opponent record"
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-230 pt/round: JCC(P11) "4th Quarter Push"
+-230 pt/round: 6pythons(P5) "Winning_Strategy"
+BcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbb
+cBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbb
+
+BcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbbBcbbb
+cBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbbcBbbb
+
+Bcb
+cBb
+
+--------------------------------------------------------------------------------
+-135 pt/round: JCC(P11) "4th Quarter Push"
+-135 pt/round: Team 7(P6) "Betray every third round"
+bBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcB
+bcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBc
+
+CcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCc
+CBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCB
+
+--------------------------------------------------------------------------------
+0 pt/round: JCC(P11) "4th Quarter Push"
+-5 pt/round: Team South(P7) "Reverse Psychology"
+BCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+cCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-250 pt/round: JCC(P11) "4th Quarter Push"
+-250 pt/round: Team 9(P8) "Betray until we win"
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-250 pt/round: JCC(P11) "4th Quarter Push"
+-250 pt/round: 10(P9) "Collude first 140 rounds unless betrayed. Betray 141st round forward."
+Bcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+cBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-250 pt/round: JCC(P11) "4th Quarter Push"
+-250 pt/round: teamAbeRoy(P10) "letsPracticeStrategy"
+Bcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+cBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-133 pt/round: JCC(P11) "4th Quarter Push"
+-137 pt/round: Blackford(P12) "TitForTat"
+BcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCc
+cBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCB
+
+BCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBC
+cCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcC
+
+cBCcBCcBCcBCcBCcBCcB
+BcCBcCBcCBcCBcCBcCBc
+
+--------------------------------------------------------------------------------
+0 pt/round: JCC(P11) "4th Quarter Push"
+-3 pt/round: The name the team gives to itself(P13) "The name the team gives to this strategy"
+BCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+cCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Section 3 - Game Data for Team Blackford
+--------------------------------------------------------------------------------
+-247 pt/round: Blackford(P12) "TitForTat"
+-253 pt/round: Lifers(P0) "Come at me"
+Bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+cbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-253 pt/round: Blackford(P12) "TitForTat"
+-247 pt/round: Not Yet!(P1) "Reduce chance of colluding to near zero."
+bccbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bBBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-249 pt/round: Blackford(P12) "TitForTat"
+-249 pt/round: Team Masters(P2) "Not be last"
+CBbcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+CcbBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-235 pt/round: Blackford(P12) "TitForTat"
+-232 pt/round: SODAN(P3) "Collude every now and again"
+BccbbbBbcbbbBbcbbbBbcbbbBbcbbbBbcbbbBbcbbbBbcbbbBbcbbbBbcbbbBbcbbbBbcbbbBbcbbbBb
+cBBbbbcbBbbbcbBbbbcbBbbbcbBbbbcbBbbbcbBbbbcbBbbbcbBbbbcbBbbbcbBbbbcbBbbbcbBbbbcb
+
+cbbbBbcbbbBbcbbbBbcbbbBbcbbbBbcbbbBbcbbbBbcbbbBbcbbbBbcbbbBbcbbbBbcbbbBbcbbbBbcb
+BbbbcbBbbbcbBbbbcbBbbbcbBbbbcbBbbbcbBbbbcbBbbbcbBbbbcbBbbbcbBbbbcbBbbbcbBbbbcbBb
+
+bbBbcbbbBbcbbbBbcbbbBbcb
+bbcbBbbbcbBbbbcbBbbbcbBb
+
+--------------------------------------------------------------------------------
+-253 pt/round: Blackford(P12) "TitForTat"
+-246 pt/round: Hi Back(P4) "My opponent record"
+bccBbcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bBBcbBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-228 pt/round: Blackford(P12) "TitForTat"
+-231 pt/round: 6pythons(P5) "Winning_Strategy"
+CbbbbBbcbbBbcbbBbcbbBbcbbBbcbbBbcbbBbcbbBbcbbBbcbbBbcbbBbcbbBbcbbBbcbbBbcbbBbcbb
+CbbbbcbBbbcbBbbcbBbbcbBbbcbBbbcbBbbcbBbbcbBbbcbBbbcbBbbcbBbbcbBbbcbBbbcbBbbcbBbb
+
+BbcbbBbcbbBbcbbBbcbbBbcbbBbcbbBbcbbBbcbbBbcbbBbcbbBbcbbBbcbbBbcbbBbcbbBbcbbBbcbb
+cbBbbcbBbbcbBbbcbBbbcbBbbcbBbbcbBbbcbBbbcbBbbcbBbbcbBbbcbBbbcbBbbcbBbbcbBbbcbBbb
+
+Bb
+cb
+
+--------------------------------------------------------------------------------
+-135 pt/round: Blackford(P12) "TitForTat"
+-135 pt/round: Team 7(P6) "Betray every third round"
+bCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcC
+bCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBC
+
+BcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBc
+cBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcB
+
+--------------------------------------------------------------------------------
+-158 pt/round: Blackford(P12) "TitForTat"
+-162 pt/round: Team South(P7) "Reverse Psychology"
+BCBCCcCBcCbcBbCBcCbcBbCBcCbcBbCBcCbcBbCBcCbcBbCBcCbcBbCBcCbcBbCBcCbcBbCBcCbcBbCB
+cCcCCBCcBCbBcbCcBCbBcbCcBCbBcbCcBCbBcbCcBCbBcbCcBCbBcbCcBCbBcbCcBCbBcbCcBCbBcbCc
+
+cCbcBbCBcCbcBbCBcCbcBbCBcCbcBbCBcCbcBbCBcCbcBbCBcCbcBbCBcCbcBb
+BCbBcbCcBCbBcbCcBCbBcbCcBCbBcbCcBCbBcbCcBCbBcbCcBCbBcbCcBCbBcb
+
+--------------------------------------------------------------------------------
+-136 pt/round: Blackford(P12) "TitForTat"
+-133 pt/round: Team 9(P8) "Betray until we win"
+cCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcC
+BCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBC
+
+BcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBc
+cBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcB
+
+CBcCBcCBcCBcCBcCBc
+CcBCcBCcBCcBCcBCcB
+
+--------------------------------------------------------------------------------
+-249 pt/round: Blackford(P12) "TitForTat"
+-252 pt/round: 10(P9) "Collude first 140 rounds unless betrayed. Betray 141st round forward."
+Bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+cbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-250 pt/round: Blackford(P12) "TitForTat"
+-244 pt/round: teamAbeRoy(P10) "letsPracticeStrategy"
+CBccbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+CcBBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-137 pt/round: Blackford(P12) "TitForTat"
+-133 pt/round: JCC(P11) "4th Quarter Push"
+cBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCB
+BcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCc
+
+cCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcCBcC
+BCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBCcBC
+
+BcCBcCBcCBcCBcCBcCBc
+cBCcBCcBCcBCcBCcBCcB
+
+--------------------------------------------------------------------------------
+0 pt/round: Blackford(P12) "TitForTat"
+-5 pt/round: The name the team gives to itself(P13) "The name the team gives to this strategy"
+CCBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCcCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Section 3 - Game Data for Team The name the team gives to itself
+--------------------------------------------------------------------------------
+-122 pt/round: The name the team gives to itself(P13) "The name the team gives to this strategy"
+24 pt/round: Lifers(P0) "Come at me"
+CCCCcCCCcCCCcCCCcCCCcCCCcCCCcCCCcCCCcCCCcCCCcCCCcCCCcCCCcCCCcCCCcCCCcCCCcCCCcCCC
+CCCCBCCCBCCCBCCCBCCCBCCCBCCCBCCCBCCCBCCCBCCCBCCCBCCCBCCCBCCCBCCCBCCCBCCCBCCCBCCC
+
+cCCCcCCCcCCCcCCCcCCCcCCCcCCCcCCCcCCCcCCCcCCCcCCCcCCC
+BCCCBCCCBCCCBCCCBCCCBCCCBCCCBCCCBCCCBCCCBCCCBCCCBCCC
+
+--------------------------------------------------------------------------------
+-500 pt/round: The name the team gives to itself(P13) "The name the team gives to this strategy"
+100 pt/round: Not Yet!(P1) "Reduce chance of colluding to near zero."
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+
+cccccccccccccccccccccccccccccccccccccccccccc
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+
+--------------------------------------------------------------------------------
+0 pt/round: The name the team gives to itself(P13) "The name the team gives to this strategy"
+0 pt/round: Team Masters(P2) "Not be last"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-414 pt/round: The name the team gives to itself(P13) "The name the team gives to this strategy"
+82 pt/round: SODAN(P3) "Collude every now and again"
+CcccccCcccccCcccccCcccccCcccccCcccccCcccccCcccccCcccccCcccccCcccccCcccccCcccccCc
+CBBBBBCBBBBBCBBBBBCBBBBBCBBBBBCBBBBBCBBBBBCBBBBBCBBBBBCBBBBBCBBBBBCBBBBBCBBBBBCB
+
+ccccCcccccCcccccCcccccCcccccCcccccCcccccCcccccC
+BBBBCBBBBBCBBBBBCBBBBBCBBBBBCBBBBBCBBBBBCBBBBBC
+
+--------------------------------------------------------------------------------
+-5 pt/round: The name the team gives to itself(P13) "The name the team gives to this strategy"
+0 pt/round: Hi Back(P4) "My opponent record"
+cCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+BCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-400 pt/round: The name the team gives to itself(P13) "The name the team gives to this strategy"
+80 pt/round: 6pythons(P5) "Winning_Strategy"
+CccccCccccCccccCccccCccccCccccCccccCccccCccccCccccCccccCccccCccccCccccCccccCcccc
+CBBBBCBBBBCBBBBCBBBBCBBBBCBBBBCBBBBCBBBBCBBBBCBBBBCBBBBCBBBBCBBBBCBBBBCBBBBCBBBB
+
+CccccCccccCccccCccccCccccCcccc
+CBBBBCBBBBCBBBBCBBBBCBBBBCBBBB
+
+--------------------------------------------------------------------------------
+-169 pt/round: The name the team gives to itself(P13) "The name the team gives to this strategy"
+33 pt/round: Team 7(P6) "Betray every third round"
+cCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcC
+BCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBC
+
+CcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCcCCc
+CBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCBCCB
+
+--------------------------------------------------------------------------------
+0 pt/round: The name the team gives to itself(P13) "The name the team gives to this strategy"
+0 pt/round: Team South(P7) "Reverse Psychology"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-3 pt/round: The name the team gives to itself(P13) "The name the team gives to this strategy"
+0 pt/round: Team 9(P8) "Betray until we win"
+cCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+BCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+0 pt/round: The name the team gives to itself(P13) "The name the team gives to this strategy"
+0 pt/round: 10(P9) "Collude first 140 rounds unless betrayed. Betray 141st round forward."
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+0 pt/round: The name the team gives to itself(P13) "The name the team gives to this strategy"
+0 pt/round: teamAbeRoy(P10) "letsPracticeStrategy"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-3 pt/round: The name the team gives to itself(P13) "The name the team gives to this strategy"
+0 pt/round: JCC(P11) "4th Quarter Push"
+cCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+BCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-5 pt/round: The name the team gives to itself(P13) "The name the team gives to this strategy"
+0 pt/round: Blackford(P12) "TitForTat"
+CCcCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
